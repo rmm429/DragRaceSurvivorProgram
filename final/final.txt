@@ -143,8 +143,17 @@ All Entries:
 	Season 5
 	Season 5
 	Season 5
+	All Stars 2
+	Season 5
+	All Stars 2
+	Season 5
+	Season 5
+	Season 5
+	Season 5
+	Season 5
+	All Stars 2
 
-Total Votes	143
+Total Votes	152
 
-Season 5		90	62.937%
-All Stars 2		53	37.063%
+Season 5		96	63.158%
+All Stars 2		56	36.842%
