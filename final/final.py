@@ -32,7 +32,8 @@ def calcPercent():
     i = 1
     for n in seasonsVotes:
         p = (n / totalVotes) * 100
-        pRound = round(p, 3)
+        pRound = "{}%".format(round(p, 3))
+        season = ""
 
         if i == 1:
            season = "S{}".format(i + 4)
