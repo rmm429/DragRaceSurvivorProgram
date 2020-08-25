@@ -29,30 +29,45 @@ def parseCSV():
 
     return totalVotes
 
+def writeCSV(s, n, p):
+    with open(csvWrite, mode='a') as results_file:
+        results_writer = csv.writer(results_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        results_writer.writerow([s, n, p])
+
 def calcPercent():
     i = 1
     for n in seasonsVotes:
         p = (n / totalVotes) * 100
-        pRound = round(p, 3)
+        pRound = "{}%".format(round(p, 3))
+        season = ""
 
         if 1 <= i <= 2:
-            print("Season {}\t\t{}\t{}%".format(i + 4, n, pRound))
+            season = "S{}".format(i + 4)
         elif i == 3:
-            print("Season 12\t\t{}\t{}%".format(n, pRound))
+            season = "S{}".format(i + 9)
         elif i == 4:
-            print("All Stars 2\t\t{}\t{}%".format(n, pRound))
+            season = "AS{}".format(i - 2)
         elif i == 5:
-            print("UK Season 1\t\t{}\t{}%".format(n, pRound))
+            season = "DRUK{}".format(i - 4)
         else:
             print("ERROR: Case out of bounds ({})\n".format(i))
+
+        print("{}\t\t{}\t\t{}".format(season, n, pRound))
+
+        if len(sys.argv) > 2:
+            writeCSV(season, n, pRound)
 
         i += 1
 
 
 if __name__ == "__main__":
     try:
-        csvFile = sys.argv[1];
-        with open(csvFile, newline='') as csvfile:
+        csvRead = sys.argv[1]
+        csvWrite = ""
+        if len(sys.argv) > 2:
+            csvWrite = sys.argv[2]
+
+        with open(csvRead, newline='') as csvfile:
             seasons = csv.reader(csvfile, delimiter=',')
             next(seasons)
 
@@ -61,6 +76,9 @@ if __name__ == "__main__":
             print("All Entries:\n")
             totalVotes = parseCSV()
             print("\nTotal Votes\t{}\n".format(totalVotes))
+
+            if len(sys.argv) > 2:
+                writeCSV('Season', 'Votes', 'Percentage')
 
             calcPercent()
     except IndexError:
